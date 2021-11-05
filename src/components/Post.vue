@@ -40,8 +40,6 @@ export default {
          const d = date.getDate() < 10 ? `${"0" + date.getDate()}` : date.getDate();
 
          this.date = `${d}.${m}.${y}`;
-
-         console.log("Hello Git");
       },
       runInterval(image) {
          setInterval(() => {
