@@ -3,7 +3,6 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Panel from "../views/Panel.vue";
 import Add from "../views/Add.vue";
-import Delete from "../views/Delete.vue";
 import Edit from "../views/Edit.vue";
 import EditPost from "../views/EditPost.vue";
 import ErrorPage from "../views/ErrorPage.vue";
@@ -36,12 +35,6 @@ const routes = [
     name: "Add",
     component: Add,
     meta: { hideFooter: true, title: "Dodaj Post" },
-  },
-  {
-    path: "/panel/usun",
-    name: "Delete",
-    component: Delete,
-    meta: { hideFooter: true, title: "Usuń Post" },
   },
   {
     path: "/panel/edytuj",

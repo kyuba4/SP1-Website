@@ -29,11 +29,6 @@ export default {
                text: "Dodaj Post",
             },
             {
-               link: "Delete",
-               img: "remove",
-               text: "Usuń Posty",
-            },
-            {
                link: "Edit",
                img: "edit",
                text: "Edytuj Posty",

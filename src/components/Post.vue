@@ -1,9 +1,9 @@
 <template>
    <div class="post">
-      <router-link class="delete-edit-btn" v-show="post.editPage" :to="{ name: 'EditPost', params: { postData: post, postID: post.id } }">
+      <router-link v-show="post.editPage" class="delete-edit-btn" :to="{ name: 'EditPost', params: { postData: post, postID: post.id } }">
          <i class="fas fa-edit"></i>
       </router-link>
-      <button @click="$emit('openModal')" class="delete-edit-btn delete" v-show="post.deletePage">
+      <button v-show="post.editPage" @click="$emit('openModal')" class="delete-edit-btn delete">
          <i class="fas fa-ban"></i>
       </button>
       <h2>{{ post.title }}</h2>
@@ -153,6 +153,7 @@ export default {
 
       &.delete {
          color: red;
+         right: 60px;
       }
    }
 
