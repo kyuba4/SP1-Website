@@ -4,30 +4,7 @@
       <div class="panel">
          <div class="panel__header"><h1>Panel Sterowania</h1></div>
          <div class="panel__cards">
-            <div class="card">
-               <router-link class="link" :to="{ name: 'Add' }">
-                  <img :src="require('../assets/add.png')" />
-                  <div class="text">
-                     <span>Dodaj Post</span>
-                  </div>
-               </router-link>
-            </div>
-            <div class="card">
-               <router-link class="link" :to="{ name: 'Delete' }">
-                  <img :src="require('../assets/remove.png')" alt="image" />
-                  <div class="text">
-                     <span>Usuń Posty</span>
-                  </div>
-               </router-link>
-            </div>
-            <div class="card">
-               <router-link class="link" :to="{ name: 'Edit' }">
-                  <img :src="require('../assets/edit.png')" alt="image" />
-                  <div class="text">
-                     <span>Edytuj Posty</span>
-                  </div>
-               </router-link>
-            </div>
+            <PanelCard :data="card" v-for="(card, index) in cards" :key="index" />
          </div>
       </div>
    </div>
@@ -35,11 +12,34 @@
 
 <script>
 import GoBackButton from "../components/GoBackButton.vue";
+import PanelCard from "../components/PanelCard.vue";
 
 export default {
    name: "AddPost",
    components: {
       GoBackButton,
+      PanelCard,
+   },
+   data() {
+      return {
+         cards: [
+            {
+               link: "Add",
+               img: "add",
+               text: "Dodaj Post",
+            },
+            {
+               link: "Delete",
+               img: "remove",
+               text: "Usuń Posty",
+            },
+            {
+               link: "Edit",
+               img: "edit",
+               text: "Edytuj Posty",
+            },
+         ],
+      };
    },
 };
 </script>
