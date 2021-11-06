@@ -5,9 +5,7 @@
       <h2 v-show="!posts.length && !loading" class="no-posts">Nie ma jeszcze żadnych postów</h2>
       <ul>
          <li v-for="post in posts" :key="post.id">
-            <div>
-               <Post :post="post" />
-            </div>
+            <Post :post="post" />
          </li>
       </ul>
    </div>

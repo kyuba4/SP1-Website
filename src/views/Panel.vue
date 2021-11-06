@@ -4,30 +4,7 @@
       <div class="panel">
          <div class="panel__header"><h1>Panel Sterowania</h1></div>
          <div class="panel__cards">
-            <div class="card">
-               <router-link class="link" :to="{ name: 'Add' }">
-                  <img :src="require('../assets/add.png')" />
-                  <div class="text">
-                     <span>Dodaj Post</span>
-                  </div>
-               </router-link>
-            </div>
-            <div class="card">
-               <router-link class="link" :to="{ name: 'Delete' }">
-                  <img :src="require('../assets/remove.png')" alt="image" />
-                  <div class="text">
-                     <span>Usuń Posty</span>
-                  </div>
-               </router-link>
-            </div>
-            <div class="card">
-               <router-link class="link" :to="{ name: 'Edit' }">
-                  <img :src="require('../assets/edit.png')" alt="image" />
-                  <div class="text">
-                     <span>Edytuj Posty</span>
-                  </div>
-               </router-link>
-            </div>
+            <PanelCard v-for="(card, index) in cards" :key="index" :data="card" />
          </div>
       </div>
    </div>
@@ -35,11 +12,34 @@
 
 <script>
 import GoBackButton from "../components/GoBackButton.vue";
+import PanelCard from "../components/PanelCard.vue";
 
 export default {
    name: "AddPost",
    components: {
       GoBackButton,
+      PanelCard,
+   },
+   data() {
+      return {
+         cards: [
+            {
+               link: "Add",
+               img: "add",
+               text: "Dodaj Post",
+            },
+            {
+               link: "Delete",
+               img: "remove",
+               text: "Usuń Posty",
+            },
+            {
+               link: "Edit",
+               img: "edit",
+               text: "Edytuj Posty",
+            },
+         ],
+      };
    },
 };
 </script>
@@ -70,41 +70,6 @@ export default {
       place-content: center;
       margin-top: 80px;
       height: 100%;
-
-      @media (max-width: 768px) {
-         .card {
-            margin: 20px auto;
-         }
-      }
-
-      .card {
-         box-shadow: 0 0 10px 0 #909090;
-         border-radius: 25px;
-         transition: 300ms;
-         max-width: 450px;
-
-         &:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 1px 0 #909090;
-         }
-
-         img {
-            max-width: 100px;
-            margin-bottom: 15px;
-         }
-
-         .link {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 30px 50px;
-
-            span {
-               white-space: nowrap;
-            }
-         }
-      }
    }
 }
 
