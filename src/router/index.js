@@ -6,6 +6,9 @@ import Add from "../views/Add.vue";
 import Edit from "../views/Edit.vue";
 import EditPost from "../views/EditPost.vue";
 import ErrorPage from "../views/ErrorPage.vue";
+import Subpage from "../views/SubpagesPanel.vue";
+import AddSubpage from "../views/AddSubpage.vue";
+import EditSubpage from "../views/EditSubpage.vue";
 
 Vue.use(VueRouter);
 
@@ -48,6 +51,24 @@ const routes = [
     component: EditPost,
     meta: { hideFooter: true, title: "Edycja Postu" },
     props: true,
+  },
+  {
+    path: "/podstrony",
+    name: "Subpages",
+    component: Subpage,
+    meta: { hideFooter: true, title: "Edycja Podstron" },
+  },
+  {
+    path: "/podstrony/dodaj",
+    name: "AddSubpage",
+    component: AddSubpage,
+    meta: { hideFooter: true, title: "Dodaj Podstronę" },
+  },
+  {
+    path: "/podstrony/edytuj",
+    name: "EditSubpage",
+    component: EditSubpage,
+    meta: { hideFooter: true, title: "Edycja Podstron" },
   },
 ];
 

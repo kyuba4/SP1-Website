@@ -1,12 +1,12 @@
 <template>
    <ul>
-      <li>O szkole</li>
-      <li>Rekrutacja</li>
-      <li>Uczniowie</li>
-      <li>Rodzice</li>
-      <li>Nottuln</li>
-      <li>Kontakt</li>
-      <li>Archiwalne</li>
+      <li><router-link to="#">O szkole</router-link></li>
+      <li><router-link to="#">Rekrutacja</router-link></li>
+      <li><router-link to="#">Uczniowie</router-link></li>
+      <li><router-link to="#">Rodzice</router-link></li>
+      <li><router-link to="#">Nottuln</router-link></li>
+      <li><router-link to="#">Kontakt</router-link></li>
+      <li><router-link to="#">Archiwalne</router-link></li>
       <li><router-link :to="{ name: 'Panel' }">Panel</router-link></li>
    </ul>
 </template>
@@ -18,11 +18,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-a {
-   width: 100%;
-   height: 100%;
+ul {
    display: flex;
    align-items: center;
-   justify-content: center;
+   flex-wrap: wrap;
+
+   a {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+   }
 }
 </style>

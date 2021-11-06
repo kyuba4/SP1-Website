@@ -3,7 +3,7 @@
       <router-link class="link" :to="{ name: data.link }">
          <img :src="require(`../assets/${data.img}.png`)" />
          <div class="text">
-            <span>{{ data.text }}</span>
+            {{ data.text }}
          </div>
       </router-link>
    </div>
@@ -19,7 +19,9 @@ export default {
    box-shadow: 0 0 10px 0 #909090;
    border-radius: 25px;
    transition: 300ms;
-   max-width: 450px;
+   width: 230px;
+   height: 230px;
+   display: flex;
 
    &:hover {
       transform: scale(1.05);
@@ -36,10 +38,14 @@ export default {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 30px 50px;
+      flex: 1;
+      gap: 10px;
 
-      span {
+      .text {
          white-space: nowrap;
+         text-overflow: ellipsis;
+         overflow: hidden;
+         max-width: 220px;
       }
    }
 

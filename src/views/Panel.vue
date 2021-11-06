@@ -33,6 +33,11 @@ export default {
                img: "edit",
                text: "Edytuj Posty",
             },
+            {
+               link: "Subpages",
+               img: "edit",
+               text: "Edytuj Podstrony",
+            },
          ],
       };
    },
@@ -60,17 +65,11 @@ export default {
 
    &__cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 230px));
       gap: 50px;
       place-content: center;
       margin-top: 80px;
       height: 100%;
-
-      @media (max-width: 768px) {
-         .card {
-            margin: 20px auto;
-         }
-      }
    }
 }
 
