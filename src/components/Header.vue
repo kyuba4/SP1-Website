@@ -235,6 +235,7 @@ header {
             justify-content: center;
             align-items: center;
             cursor: pointer;
+            width: 100%;
          }
       }
    }

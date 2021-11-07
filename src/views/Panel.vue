@@ -5,6 +5,7 @@
          <div class="panel__header"><h1>Panel Sterowania</h1></div>
          <div class="panel__cards">
             <PanelCard :data="card" v-for="(card, index) in cards" :key="index" />
+            <router-view />
          </div>
       </div>
    </div>

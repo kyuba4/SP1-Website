@@ -5,7 +5,7 @@
       </div>
       <Loader v-show="loading" />
       <GoBackButton :link="'Edit'" />
-      <VueEditor :postData="postData" @editPost="updatePost" :postSection="true" @getPost="getPost" />
+      <VueEditor :data="postData" :addFile="false" @save="updatePost" />
    </div>
 </template>
 <script>
@@ -52,18 +52,10 @@ export default {
 
          this.loading = false;
       },
-      async getPost() {
-         const post = await db.collection("posts").doc(this.postID).get();
-
-         this.postData = {
-            title: post.data().title,
-            desc: post.data().desc,
-         };
-      },
    },
    created() {
       this.postID = this.$attrs.postID;
-      this.postData = this.$route.params.postData || this.getPost();
+      this.postData = this.$route.params.postData;
    },
 };
 </script>

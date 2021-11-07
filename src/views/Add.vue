@@ -3,7 +3,7 @@
       <Loader v-show="loading" />
       <div class="banner" :class="showBanner ? 'visible' : null">Post został dodany!</div>
       <GoBackButton :link="'Panel'" />
-      <VueEditor :postData="post" :addPanel="true" :postSection="true" @addPost="updatePostData" />
+      <VueEditor :data="post" :addFile="true" :showCheckbox="false" @save="updatePostData" />
    </div>
 </template>
 

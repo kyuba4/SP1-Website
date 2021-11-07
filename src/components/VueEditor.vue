@@ -1,14 +1,14 @@
 <template>
    <div id="edit-post">
       <div class="container">
-         <div>Tytuł</div>
-         <textarea v-model="post.title" id="editPostTitle" placeholder="Dodaj tytuł"></textarea>
-         <div>Opis</div>
-         <VueEditor v-model="post.desc" ref="description" />
+         <div>{{ headingOne }}</div>
+         <textarea v-model="title" id="editPostTitle" placeholder="Dodaj tytuł"></textarea>
+         <div>{{ headingTwo }}</div>
+         <VueEditor v-model="desc" ref="description" />
       </div>
-      <!-- Add Post Section-->
-      <div class="button-wrap" v-show="addPanel">
-         <div class="input-wrap">
+      <div class="button-wrap">
+         <!-- Add Image (Add Post Section Only) -->
+         <div class="input-wrap" v-show="addFile">
             <span
                >Dodaj zdjęcie
                <i class="fas fa-arrow-right" v-show="screenSize > 500"></i>
@@ -18,20 +18,28 @@
                <input type="file" name="image" id="image" @change="postImg" accept=".jpeg, .jpg, .png" />
             </form>
          </div>
+         <div class="checkbox-container" v-show="showCheckbox">
+            <div>Miejsce docelowe <i class="fas fa-arrow-right"></i></div>
+            <div class="wrapper">
+               <span :class="!checkboxValue ? 'bold' : null">Header</span>
+               <label class="check-1">
+                  <input type="checkbox" v-model="checkboxValue" />
+                  <div class="inner"></div>
+                  <div class="bullet"></div>
+               </label>
+               <span :class="checkboxValue ? 'bold' : null">Sidebar</span>
+            </div>
+         </div>
          <button
-            class="btn-add-edit"
+            class="btn-save"
             @click="
-               $emit('addPost', post);
+               $emit('save', post);
                clearInputs();
             "
             :disabled="!btnEnabled"
          >
-            Dodaj
+            Zapisz
          </button>
-      </div>
-      <!-- Edit Post Section-->
-      <div class="button-wrap">
-         <button class="btn-add-edit" v-show="!addPanel" :disabled="!btnEnabled" @click="$emit('editPost', post)">Edytuj</button>
       </div>
    </div>
 </template>
@@ -40,37 +48,54 @@ import { VueEditor } from "vue2-editor";
 
 export default {
    name: "AddEditPost",
-   props: ["postData", "addPanel", "postSection"],
+   props: ["data", "addFile", "showCheckbox"],
    components: {
       VueEditor,
    },
    data() {
       return {
          screenSize: null,
-         post: {
-            title: "",
-            desc: "",
-            img: "",
-         },
+         title: "",
+         desc: "",
+         img: "",
+         checkboxValue: true,
       };
    },
    computed: {
       btnEnabled() {
-         return this.post.title > "" && this.post.desc > "";
+         return this.title > "" && this.desc > "";
+      },
+      post() {
+         const data = {
+            title: this.title,
+            desc: this.desc,
+            img: this.img,
+            place: this.checkboxValue,
+         };
+
+         return data;
+      },
+      headingOne() {
+         return this.$route.name == "Add" || this.$route.name == "EditPost" ? "Tytuł" : "Nazwa Linku/Podstrony";
+      },
+      headingTwo() {
+         return this.$route.name == "Add" || this.$route.name == "EditPost" ? "Opis" : "Zawartość strony";
       },
    },
    methods: {
       postImg(e) {
-         this.post.img = e.target.files[0];
+         this.img = e.target.files[0];
       },
       refresh() {
          window.location.reload();
       },
       clearInputs() {
-         this.post.title = "";
-         this.post.desc = "";
-         this.post.img = "";
-         document.getElementById("input").reset();
+         if (this.$route.name == "Add" || this.$route.name == "AddSubpage") {
+            this.title = "";
+            this.desc = "";
+            this.img = "";
+            document.getElementById("input").reset();
+         }
       },
    },
    created() {
@@ -81,10 +106,10 @@ export default {
          this.screenSize = window.innerWidth;
       });
 
-      this.post.title = this.postData.title;
-      this.post.desc = this.postData.desc;
+      this.title = this.data.title;
+      this.desc = this.data.desc;
 
-      if ((!this.post.title || !this.post.desc) && this.$route.name === "EditPost") {
+      if ((!this.title || !this.desc) && this.$route.name == "EditPost") {
          this.$router.push({ name: "Edit" });
       }
    },
@@ -203,7 +228,96 @@ export default {
    }
 }
 
-.btn-add-edit {
+// Checkbox styling
+label {
+   display: block;
+   cursor: pointer;
+}
+
+label > input[type="checkbox"] {
+   display: none;
+}
+
+.check-1 {
+   width: 50px;
+   height: 30px;
+   border-radius: 50px;
+   position: relative;
+}
+
+.check-1 .inner {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   border-radius: 50px;
+   border: 2px solid #ccc;
+   background: #f9f9f9;
+   transition: all 0.2s ease;
+}
+
+.check-1 .bullet {
+   position: relative;
+   width: 26px;
+   height: 26px;
+   background: #323232;
+   border-radius: 50%;
+   transition: all 0.3s ease;
+   top: 2px;
+   left: 2px;
+   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.15);
+}
+
+.check-1 input:checked ~ .inner {
+   transition: all 0.2s linear;
+}
+
+.check-1 input:checked ~ .bullet {
+   left: 22px;
+   transition: all 0.3s ease;
+   animation: 0.2s bullet;
+}
+
+.checkbox-container {
+   display: flex;
+   width: 100%;
+   align-items: center;
+   justify-content: space-around;
+   border: 1px solid #ccc;
+   padding: 10px;
+
+   @media (max-width: 550px) {
+      i {
+         display: none;
+      }
+   }
+
+   .wrapper {
+      display: flex;
+      align-items: center;
+
+      span {
+         margin: 0 15px;
+
+         &.bold {
+            font-weight: bold;
+            margin: 0 14px;
+         }
+      }
+   }
+}
+
+@keyframes bullet {
+   0%,
+   100% {
+      width: 25px;
+   }
+   40% {
+      width: 30px;
+   }
+}
+
+// Save Button
+.btn-save {
    padding: 15px 30px;
    width: fit-content;
    border: 0;
