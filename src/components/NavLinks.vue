@@ -1,19 +1,33 @@
 <template>
    <ul>
-      <li><router-link to="#">O szkole</router-link></li>
-      <li><router-link to="#">Rekrutacja</router-link></li>
-      <li><router-link to="#">Uczniowie</router-link></li>
-      <li><router-link to="#">Rodzice</router-link></li>
-      <li><router-link to="#">Nottuln</router-link></li>
-      <li><router-link to="#">Kontakt</router-link></li>
-      <li><router-link to="#">Archiwalne</router-link></li>
-      <li><router-link :to="{ name: 'Panel' }">Panel</router-link></li>
+      <li v-for="(link, index) in links" :key="index">
+         <router-link :to="{ name: 'Subpage', params: { subpage: `${link.path}`, title: `${link.title}` } }">{{ link.title }}</router-link>
+      </li>
    </ul>
 </template>
 
 <script>
+import { database as db } from "@/components/firebaseInit";
+
 export default {
    name: "Navlinks",
+   data() {
+      return {
+         links: [],
+      };
+   },
+   methods: {
+      async getLinks() {
+         const response = await db.collection("subpages").where("place", "==", "header").get();
+
+         await response.docs.forEach((doc) => {
+            this.links = [...this.links, doc.data()];
+         });
+      },
+   },
+   created() {
+      this.getLinks();
+   },
 };
 </script>
 

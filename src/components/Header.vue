@@ -64,7 +64,7 @@ export default {
    },
    methods: {
       closeMenu(e) {
-         if (e.target.className === "closing-div open") {
+         if (e.target.className == "closing-div open") {
             this.showMenu = false;
          }
       },
@@ -156,12 +156,15 @@ header {
             justify-content: center;
 
             li {
-               padding: 10px 15px;
                cursor: pointer;
                text-align: center;
                transition: border-bottom 300ms;
                border-bottom: 3px solid transparent;
                white-space: nowrap;
+
+               a {
+                  padding: 10px 15px;
+               }
 
                @media (max-width: 820px) {
                   font-size: 14px;
@@ -192,28 +195,34 @@ header {
 
 // Mobile Nav
 .mobile-nav {
+   $mobile-nav-width: 78%;
+
    background-color: #404040;
    color: white;
    font-size: 18px;
    position: fixed;
    height: 100%;
-   width: 78%;
+   width: $mobile-nav-width;
    top: 0;
    left: -100%;
-   z-index: 1000;
+   z-index: 5000;
    transition: all 650ms ease;
    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.432) 7px 0 7px -3px;
 
    .closing-div {
       position: fixed;
       height: 100%;
-      width: 100% - 78%;
+      width: 100% - $mobile-nav-width;
       top: 0;
-      right: 0;
-      display: none;
+      right: (100% + $mobile-nav-width) - (100% - $mobile-nav-width);
+      opacity: 0;
+      background: #32323250;
+      z-index: 999;
 
       &.open {
-         display: initial;
+         opacity: 1;
+         right: 0;
+         transition: opacity 500ms ease 650ms, right 0ms;
       }
    }
 

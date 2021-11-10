@@ -18,6 +18,7 @@
                <input type="file" name="image" id="image" @change="postImg" accept=".jpeg, .jpg, .png" />
             </form>
          </div>
+         <!-- Subpages checkbox container -->
          <div class="checkbox-container" v-show="showCheckbox">
             <div>Miejsce docelowe <i class="fas fa-arrow-right"></i></div>
             <div class="wrapper">
@@ -161,7 +162,6 @@ export default {
       button {
          &.ql-link,
          &.ql-blockquote,
-         &.ql-list,
          &.ql-code-block {
             display: none !important;
          }

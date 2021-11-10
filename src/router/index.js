@@ -1,12 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Subpage from "../views/Subpage.vue";
 import Panel from "../views/Panel.vue";
 import Add from "../views/Add.vue";
 import Edit from "../views/Edit.vue";
 import EditPost from "../views/EditPost.vue";
 import ErrorPage from "../views/ErrorPage.vue";
-import Subpage from "../views/SubpagesPanel.vue";
+import SubpagesPanel from "../views/SubpagesPanel.vue";
 import AddSubpage from "../views/AddSubpage.vue";
 import EditSubpage from "../views/EditSubpage.vue";
 
@@ -25,6 +26,14 @@ const routes = [
     component: Home,
     meta: {
       title: "Strona Główna",
+    },
+  },
+  {
+    path: "/page/:subpage",
+    name: "Subpage",
+    component: Subpage,
+    meta: {
+      title: "Wiadomości",
     },
   },
   {
@@ -55,7 +64,7 @@ const routes = [
   {
     path: "/podstrony",
     name: "Subpages",
-    component: Subpage,
+    component: SubpagesPanel,
     meta: { hideFooter: true, title: "Edycja Podstron" },
   },
   {
