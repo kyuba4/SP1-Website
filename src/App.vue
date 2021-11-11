@@ -25,6 +25,7 @@ export default {
 <style lang="scss">
 // Font
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+
 body {
    overflow-y: scroll;
 }

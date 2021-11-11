@@ -4,8 +4,8 @@
       <ImageSlider />
       <div class="content">
          <div class="description-wrap">
-            <div class="description-content">
-               <h1 class="content-header">{{ $route.params.title }}</h1>
+            <div class="description-content" v-show="!loading">
+               <h1 class="content-header">{{ header }}</h1>
                <div class="content-description" v-html="content"></div>
             </div>
          </div>
@@ -29,6 +29,7 @@ export default {
    data() {
       return {
          loading: false,
+         header: "",
          content: "",
       };
    },
@@ -41,14 +42,16 @@ export default {
          try {
             const response = await db.collection("subpages").where("path", "==", docName).get();
             this.content = await response.docs[0].data().desc;
+            this.header = await response.docs[0].data().title;
             this.loading = false;
          } catch (error) {
             console.log(error);
             this.loading = false;
+            this.$router.push({ name: "ErrorPage" });
          }
       },
    },
-   mounted() {
+   created() {
       this.getContent();
    },
 };
@@ -71,6 +74,11 @@ export default {
       .content-header {
          font-weight: 500;
          margin-bottom: 15px;
+      }
+
+      a {
+         text-decoration: underline;
+         color: rgb(0, 132, 255);
       }
    }
 }

@@ -1,6 +1,6 @@
 <template>
    <footer>
-      <span>Oficjalna witryna Szkoły Podstawowej nr. 1 w Chodzieży</span>
+      <span>Oficjalna witryna Szkoły Podstawowej nr 1 w Chodzieży</span>
    </footer>
 </template>
 <script>

@@ -160,7 +160,6 @@ export default {
 
    .ql-formats {
       button {
-         &.ql-link,
          &.ql-blockquote,
          &.ql-code-block {
             display: none !important;

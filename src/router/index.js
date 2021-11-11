@@ -32,9 +32,6 @@ const routes = [
     path: "/page/:subpage",
     name: "Subpage",
     component: Subpage,
-    meta: {
-      title: "Wiadomości",
-    },
   },
   {
     path: "/panel",
@@ -87,7 +84,9 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  document.title = `${to.meta.title} - SP1`;
+  const title = `${to.meta.title || "Szkoła Podstawowa nr 1"} - SP1`;
+
+  document.title = `${title}`;
   next();
 });
 

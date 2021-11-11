@@ -4,16 +4,16 @@
          <img class="image-holder" src="../assets/image-holder.png" alt="image" />
       </div>
 
-      <div class="image-wrap" :class="highlighted === 0 ? 'active' : null">
-         <img class="image" src="https://sp1chodziez.pl/thumb_76700d260986.jpeg" alt="image" />
+      <div class="image-wrap" :class="highlighted === 0 ? 'active' : null" data-id="image">
+         <img class="imageSlide" src="https://sp1chodziez.pl/thumb_76700d260986.jpeg" alt="image" />
       </div>
 
-      <div class="image-wrap" :class="highlighted === 1 ? 'active' : null">
-         <img class="image" src="https://sp1chodziez.pl/thumb_60caa6fc42b2.jpeg" alt="image" />
+      <div class="image-wrap" :class="highlighted === 1 ? 'active' : null" data-id="image">
+         <img class="imageSlide" src="https://sp1chodziez.pl/thumb_60caa6fc42b2.jpeg" alt="image" />
       </div>
 
-      <div class="image-wrap" :class="highlighted === 2 ? 'active' : null">
-         <img class="image" src="https://sp1chodziez.pl/thumb_34073542668e.jpeg" alt="image" />
+      <div class="image-wrap" :class="highlighted === 2 ? 'active' : null" data-id="image">
+         <img class="imageSlide" src="https://sp1chodziez.pl/thumb_34073542668e.jpeg" alt="image" />
       </div>
    </div>
 </template>
@@ -25,16 +25,21 @@ export default {
          highlighted: 0,
       };
    },
-   mounted() {
-      const numberOfImages = document.querySelectorAll(".image").length;
-
+   created() {
       setInterval(() => {
          this.highlighted += 1;
 
-         if (this.highlighted === numberOfImages) {
+         if (this.highlighted >= this.numberOfImages) {
             this.highlighted = 0;
          }
+
+         console.log(this.imgLength);
       }, 5000);
+   },
+   computed: {
+      numberOfImages() {
+         return document.querySelectorAll(".imageSlide").length;
+      },
    },
 };
 </script>
@@ -52,18 +57,19 @@ export default {
       opacity: 0;
       transition: opacity 500ms ease;
       position: absolute;
-      display: grid;
-      place-content: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding: 0 20px;
 
       &:first-child {
          z-index: 3;
       }
 
-      .image {
+      .imageSlide {
          max-width: 100%;
          border-radius: 15px;
-         box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+         box-shadow: rgba(50, 50, 93, 0.25) 0px 0px 12px 4px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
       }
    }
 
