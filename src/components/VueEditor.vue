@@ -4,7 +4,7 @@
          <div>{{ headingOne }}</div>
          <textarea v-model="title" id="editPostTitle" placeholder="Dodaj tytuł"></textarea>
          <div>{{ headingTwo }}</div>
-         <VueEditor v-model="desc" ref="description" />
+         <VueEditor v-model="desc" placeholder="Dodaj opis" :editorOptions="editorSettings" />
       </div>
       <div class="button-wrap">
          <!-- Add Image (Add Post Section Only) -->
@@ -45,7 +45,12 @@
    </div>
 </template>
 <script>
-import { VueEditor } from "vue2-editor";
+import { VueEditor, Quill } from "vue2-editor";
+import ImageResize from "quill-image-resize";
+import { ImageDrop } from "quill-image-drop-module";
+
+Quill.register("modules/imageResize", ImageResize);
+Quill.register("modules/imageDrop", ImageDrop);
 
 export default {
    name: "AddEditPost",
@@ -60,6 +65,12 @@ export default {
          desc: "",
          img: "",
          checkboxValue: true,
+         editorSettings: {
+            modules: {
+               imageResize: {},
+               imageDrop: true,
+            },
+         },
       };
    },
    computed: {

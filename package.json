@@ -13,6 +13,8 @@
     "@tiptap/vue-2": "^2.0.0-beta.68",
     "core-js": "^3.6.5",
     "firebase": "^9.2.0",
+    "quill-image-drop-module": "^1.0.3",
+    "quill-image-resize": "^3.0.9",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vue2-editor": "^2.10.3"

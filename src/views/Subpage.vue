@@ -71,14 +71,17 @@ export default {
       border-radius: 15px;
       padding: 30px;
 
+      @media (max-width: 1000px) {
+         width: 90%;
+      }
+
       .content-header {
          font-weight: 500;
          margin-bottom: 15px;
       }
 
-      a {
-         text-decoration: underline;
-         color: rgb(0, 132, 255);
+      .content-description {
+         margin: 20px 0;
       }
    }
 }

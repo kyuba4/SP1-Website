@@ -32,8 +32,6 @@ export default {
          if (this.highlighted >= this.numberOfImages) {
             this.highlighted = 0;
          }
-
-         console.log(this.imgLength);
       }, 5000);
    },
    computed: {

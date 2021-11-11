@@ -108,7 +108,7 @@ header {
          border-radius: 50%;
          max-width: 70px;
          height: auto;
-         margin-right: 15px;
+         margin: 0 15px 0 0;
       }
 
       a {

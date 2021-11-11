@@ -46,6 +46,13 @@ button:disabled {
    cursor: not-allowed !important;
 }
 
+img {
+   max-width: 100%;
+   height: auto;
+   display: flex;
+   margin: 0 auto;
+}
+
 // Quill styles
 $padding: 1.5rem;
 
@@ -95,5 +102,9 @@ $padding: 1.5rem;
 
 .ql-header {
    display: none !important;
+}
+
+.ql-snow a {
+   color: rgb(0, 132, 255) !important;
 }
 </style>
