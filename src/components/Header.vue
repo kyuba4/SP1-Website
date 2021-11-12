@@ -216,10 +216,11 @@ header {
       top: 0;
       right: (100% + $mobile-nav-width) - (100% - $mobile-nav-width);
       opacity: 0;
-      background: #32323250;
+      background: #00000001;
       z-index: 999;
 
       &.open {
+         backdrop-filter: blur(4px);
          opacity: 1;
          right: 0;
          transition: opacity 500ms ease 650ms, right 0ms;

@@ -45,10 +45,15 @@ export default {
             this.header = await response.docs[0].data().title;
             this.loading = false;
          } catch (error) {
-            console.log(error);
+            console.log(error.message);
             this.loading = false;
-            this.$router.push({ name: "ErrorPage" });
+            this.$router.go({ name: "ErrorPage" });
          }
+      },
+   },
+   watch: {
+      $route() {
+         this.getContent();
       },
    },
    created() {
@@ -60,6 +65,7 @@ export default {
 .description-wrap {
    display: flex;
    flex: 3;
+   margin-bottom: 30px;
 
    .description-content {
       display: flex;
@@ -72,7 +78,8 @@ export default {
       padding: 30px;
 
       @media (max-width: 1000px) {
-         width: 90%;
+         width: 100%;
+         font-size: 14px;
       }
 
       .content-header {

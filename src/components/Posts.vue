@@ -6,7 +6,7 @@
          Załaduj więcej
          <i class="fas fa-sync"></i>
       </div>
-      <div class="more-posts" style="cursor: text; text-decoration: underline" v-show="allPostsLoaded">To już wszystkie aktualności</div>
+      <div class="more-posts" style="cursor: text" v-show="allPostsLoaded"><span>To już wszystkie aktualności</span></div>
    </div>
 </template>
 <script>

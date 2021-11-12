@@ -18,7 +18,7 @@ export default {
    },
    methods: {
       async getLinks() {
-         const response = await db.collection("subpages").where("place", "==", "header").get();
+         const response = await db.collection("subpages").orderBy("title", "asc").where("place", "==", "header").get();
 
          await response.docs.forEach((doc) => {
             this.links = [...this.links, doc.data()];

@@ -66,7 +66,7 @@ export default {
       right: 0;
       left: 0;
       margin: auto;
-      width: 80%;
+      width: 90%;
    }
 
    &__btn {
