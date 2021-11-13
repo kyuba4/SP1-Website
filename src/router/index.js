@@ -76,6 +76,13 @@ const routes = [
     component: EditSubpage,
     meta: { hideFooter: true, title: "Edycja Podstron" },
   },
+  {
+    path: "/podstrony/edytuj/:pageID",
+    name: "SubpageEditor",
+    component: AddSubpage,
+    meta: { hideFooter: true, title: "Edytuj Podstronę" },
+    props: true,
+  },
 ];
 
 const router = new VueRouter({
