@@ -9,6 +9,7 @@ import EditPost from "../views/EditPost.vue";
 import ErrorPage from "../views/ErrorPage.vue";
 import SubpagesPanel from "../views/SubpagesPanel.vue";
 import AddSubpage from "../views/AddSubpage.vue";
+import EditSubpagePanel from "../views/EditSubpagePanel.vue";
 import EditSubpage from "../views/EditSubpage.vue";
 
 Vue.use(VueRouter);
@@ -72,14 +73,14 @@ const routes = [
   },
   {
     path: "/podstrony/edytuj",
-    name: "EditSubpage",
-    component: EditSubpage,
+    name: "EditSubpagePanel",
+    component: EditSubpagePanel,
     meta: { hideFooter: true, title: "Edycja Podstron" },
   },
   {
     path: "/podstrony/edytuj/:pageID",
     name: "SubpageEditor",
-    component: AddSubpage,
+    component: EditSubpage,
     meta: { hideFooter: true, title: "Edytuj Podstronę" },
     props: true,
   },

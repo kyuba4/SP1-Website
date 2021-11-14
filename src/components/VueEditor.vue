@@ -31,6 +31,7 @@
                <span :class="checkboxValue ? 'bold' : null">Sidebar</span>
             </div>
          </div>
+         <!-- Save Button -->
          <button
             class="btn-save"
             @click="
@@ -65,6 +66,7 @@ export default {
          desc: "",
          img: "",
          checkboxValue: true,
+
          editorSettings: {
             modules: {
                imageResize: {},
@@ -82,7 +84,8 @@ export default {
             title: this.title,
             desc: this.desc,
             img: this.img,
-            place: this.checkboxValue,
+            place: this.checkboxValue ? "sidebar" : "header",
+            path: this.title,
          };
 
          return data;
@@ -120,6 +123,11 @@ export default {
 
       this.title = this.data.title;
       this.desc = this.data.desc;
+
+      if (this.$route.name == "SubpageEditor") {
+         this.checkboxValue = this.data.place == "header" ? false : true;
+         this.data.path = this.data.title;
+      }
 
       if ((!this.title || !this.desc) && this.$route.name == "EditPost") {
          this.$router.push({ name: "Edit" });

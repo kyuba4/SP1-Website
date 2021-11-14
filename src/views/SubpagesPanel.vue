@@ -28,7 +28,7 @@ export default {
                text: "Dodaj Podstrony",
             },
             {
-               link: "EditSubpage",
+               link: "EditSubpagePanel",
                img: "edit",
                text: "Edytuj Zawartość",
             },

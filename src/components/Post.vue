@@ -166,18 +166,18 @@ export default {
       background-size: calc(100% + 100%);
       animation: refresh 1.5s infinite ease-out;
 
-      @keyframes refresh {
-         0% {
-            background-position: calc(100%);
-         }
-         60%,
-         100% {
-            background-position: -100%;
-         }
-      }
-
       @media (max-width: 600px) {
          height: 170px;
+      }
+   }
+
+   @keyframes refresh {
+      0% {
+         background-position: calc(100%);
+      }
+      60%,
+      100% {
+         background-position: -100%;
       }
    }
 }
