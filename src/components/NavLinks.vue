@@ -62,6 +62,10 @@ ul {
    .skelet-link-wrap {
       display: flex;
 
+      @media (max-width: 750px) {
+         display: none;
+      }
+
       .skelet-link {
          width: 80px;
          height: 15px;
