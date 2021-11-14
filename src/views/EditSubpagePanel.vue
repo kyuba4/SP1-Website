@@ -7,7 +7,9 @@
             <h1>Header</h1>
             <ul>
                <li v-for="(subpage, index) in subpagesHeader" :key="index">
-                  <router-link :to="{ name: 'SubpageEditor', params: { pageID: subpage.path, data: subpage } }">{{ subpage.title }}</router-link>
+                  <router-link :to="{ name: 'SubpageEditor', params: { pageID: subpage.path, data: subpage } }">
+                     {{ subpage.title }}
+                  </router-link>
                </li>
             </ul>
          </div>
@@ -92,6 +94,7 @@ export default {
             border: 1px solid #ccc;
             display: flex;
             margin: 25px 0;
+            position: relative;
 
             a {
                padding: 15px 25px;

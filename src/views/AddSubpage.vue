@@ -3,7 +3,6 @@
    <div>
       <GoBackButton :link="'Subpages'" />
       <Loader v-show="loading" />
-      <div class="banner" :class="showBanner ? 'visible' : null">Podstrona została dodana!</div>
       <VueEditor :data="data" :showCheckbox="true" @save="addSubpage" />
    </div>
 </template>
@@ -23,7 +22,6 @@ export default {
    data() {
       return {
          loading: false,
-         showBanner: false,
          data: {
             title: null,
             desc: null,
@@ -43,14 +41,11 @@ export default {
 
          try {
             await db.collection("subpages").add(this.data);
-            this.showBanner = true;
+            this.$router.push({ name: "EditSubpagePanel" });
+            window.location.reload();
          } catch (e) {
             console.log(e.message);
          }
-
-         setTimeout(() => {
-            this.showBanner = false;
-         }, 5000);
 
          this.loading = false;
       },

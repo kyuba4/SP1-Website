@@ -136,27 +136,6 @@ export default {
       display: flex;
    }
 
-   .delete-edit-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      top: 20px;
-      right: 10px;
-      font-size: 1.5rem;
-      transition: transform 300ms;
-      border: 0;
-      outline: 0;
-      background: white;
-      cursor: pointer;
-      z-index: 2;
-
-      &.delete {
-         color: red;
-         right: 60px;
-      }
-   }
-
    .skelet {
       margin-top: 15px;
       width: 100%;
@@ -179,6 +158,27 @@ export default {
       100% {
          background-position: -100%;
       }
+   }
+}
+
+.delete-edit-btn {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: absolute;
+   top: 20px;
+   right: 10px;
+   font-size: 1.5rem;
+   transition: transform 300ms;
+   border: 0;
+   outline: 0;
+   background: white;
+   cursor: pointer;
+   z-index: 2;
+
+   &.delete {
+      color: red;
+      right: 60px;
    }
 }
 </style>

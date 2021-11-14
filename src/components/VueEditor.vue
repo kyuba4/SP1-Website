@@ -1,8 +1,20 @@
 <template>
    <div id="edit-post">
+      <div v-show="modalOpen && routeName == 'SubpageEditor'" class="modal">
+         <div class="modal-content" style="width: 500px; max-width: 100%">
+            <p style="font-size: 16px">Czy na pewno chcesz usunąć tą podstronę?</p>
+            <div class="btn-wrap">
+               <button @click="$emit('deletePage', data.docID)" id="delete-post">Usuń</button>
+               <button id="close" @click="modalOpen = false">Zamknij</button>
+            </div>
+         </div>
+      </div>
       <div class="container">
          <div>{{ headingOne }}</div>
-         <textarea v-model="title" id="editPostTitle" placeholder="Dodaj tytuł"></textarea>
+         <div style="display: flex; justify-content: space-between">
+            <textarea v-model="title" id="editPostTitle" placeholder="Dodaj tytuł"></textarea>
+            <button @click="modalOpen = true" class="delete-btn" v-show="routeName == 'SubpageEditor'">Usuń Podstronę</button>
+         </div>
          <div>{{ headingTwo }}</div>
          <VueEditor v-model="desc" placeholder="Dodaj opis" :editorOptions="editorSettings" />
       </div>
@@ -48,10 +60,8 @@
 <script>
 import { VueEditor, Quill } from "vue2-editor";
 import ImageResize from "quill-image-resize";
-import { ImageDrop } from "quill-image-drop-module";
 
 Quill.register("modules/imageResize", ImageResize);
-Quill.register("modules/imageDrop", ImageDrop);
 
 export default {
    name: "AddEditPost",
@@ -66,11 +76,11 @@ export default {
          desc: "",
          img: "",
          checkboxValue: true,
+         modalOpen: false,
 
          editorSettings: {
             modules: {
                imageResize: {},
-               imageDrop: true,
             },
          },
       };
@@ -84,7 +94,7 @@ export default {
             title: this.title,
             desc: this.desc,
             img: this.img,
-            place: this.checkboxValue ? "sidebar" : "header",
+            place: this.checkboxValue,
             path: this.title,
          };
 
@@ -95,6 +105,9 @@ export default {
       },
       headingTwo() {
          return this.$route.name == "Add" || this.$route.name == "EditPost" ? "Opis" : "Zawartość strony";
+      },
+      routeName() {
+         return this.$route.name;
       },
    },
    methods: {
@@ -140,9 +153,31 @@ export default {
    margin: 0 15px;
    position: relative;
 
+   #delete-post {
+      background: #d40000;
+      color: white;
+   }
+
    .container {
       max-width: 1100px;
       margin: 30px auto;
+
+      .delete-btn {
+         width: 150px;
+         height: 50px;
+         margin: auto 0;
+         border-radius: 5000px;
+         border: 0;
+         outline: 0;
+         background: #323232;
+         color: white;
+         transition: 300ms;
+         cursor: pointer;
+
+         &:hover {
+            color: rgb(255, 68, 68);
+         }
+      }
 
       #editPostTitle {
          display: flex;

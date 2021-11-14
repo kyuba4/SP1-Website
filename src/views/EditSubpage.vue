@@ -2,7 +2,7 @@
    <div>
       <GoBackButton :link="'EditSubpagePanel'" />
       <Loader v-show="loading" />
-      <VueEditor :data="data" @save="editSubpage" :showCheckbox="true" />
+      <VueEditor :data="data" @save="editSubpage" :showCheckbox="true" @deletePage="deletePage" />
    </div>
 </template>
 <script>
@@ -33,12 +33,15 @@ export default {
          this.loading = true;
 
          try {
-            await db.collection("subpages").doc(this.docID).update({
-               title: data.title,
-               desc: data.desc,
-               place: data.place,
-               path: this.newPath,
-            });
+            await db
+               .collection("subpages")
+               .doc(this.docID)
+               .update({
+                  title: data.title,
+                  desc: data.desc,
+                  place: data.place ? "sidebar" : "header",
+                  path: this.newPath,
+               });
             this.loading = false;
             this.$router.push({ name: "EditSubpagePanel" });
             window.location.reload();
@@ -46,6 +49,18 @@ export default {
             console.log(error.message);
             this.loading = false;
          }
+      },
+      async deletePage(id) {
+         this.loading = true;
+
+         try {
+            await db.collection("subpages").doc(id).delete();
+         } catch (error) {
+            console.log(error.message);
+         }
+
+         this.loading = false;
+         this.$router.push({ name: "EditSubpagePanel" });
       },
       setPath(title) {
          // eslint-disable-next-line no-useless-escape
