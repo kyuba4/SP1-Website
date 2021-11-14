@@ -3,42 +3,49 @@
       <button @click="open = !open" class="sidebar__btn" :class="open ? 'btn-move' : null">
          {{ open ? "Ukryj" : "Pokaż" }}
       </button>
-      <p class="sidebar__header">Nasza Szkoła</p>
-      <ul>
-         <li>Aktualności</li>
-         <li>Deklaracja Dostępności</li>
-         <li>Koronawirus</li>
-         <li>E - Dziennik</li>
-         <li>Usługa Office 365</li>
-         <li>Rys Historyczny</li>
-         <li>Kalendarz Roku Szkolnego 2020/2021</li>
-         <li>Projekt SPINka</li>
-         <li>Szkoła Promująca Zdrowie</li>
-         <li>Program Erasmus Plus</li>
-         <li>Zajęcia Pozalekcyjne</li>
-         <li>Pedagog / Psycholog</li>
-         <li>Sekretariat</li>
-         <li>Świetlica</li>
-         <li>Sponsorzy Szkoły</li>
-         <li>Ważne Informacje</li>
-         <li>Dokumenty Szkolne</li>
-         <li>Pliki Do Pobrania</li>
-         <li>Filmiki / Fotorelacje</li>
+      <p class="sidebar__header" v-show="!loading">Nasza Szkoła</p>
+      <ul v-show="!loading">
+         <li v-for="(link, index) in links" :key="index">
+            <router-link :to="{ name: 'Subpage', params: { subpage: link.path } }">{{ link.title }}</router-link>
+         </li>
       </ul>
    </div>
 </template>
 <script>
+import { database as db } from "@/components/firebaseInit";
+
 export default {
    Name: "Sidenav",
    data() {
       return {
          open: false,
+         links: [],
+         loading: true,
       };
+   },
+   methods: {
+      async getData() {
+         this.loading = true;
+
+         try {
+            const data = await db.collection("subpages").where("place", "==", "sidebar").get();
+
+            data.forEach((doc) => {
+               this.links = [...this.links, doc.data()];
+            });
+         } catch (error) {
+            console.log(error.message);
+         }
+
+         this.loading = false;
+      },
    },
    created() {
       if (window.screen.width <= 1000) {
          this.open = false;
       }
+
+      this.getData();
    },
 };
 </script>

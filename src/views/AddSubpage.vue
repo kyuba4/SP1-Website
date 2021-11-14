@@ -41,7 +41,6 @@ export default {
 
          try {
             await db.collection("subpages").add(this.data);
-            this.$router.push({ name: "EditSubpagePanel" });
             window.location.reload();
          } catch (e) {
             console.log(e.message);
