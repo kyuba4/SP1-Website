@@ -41,6 +41,7 @@ export default {
 
          try {
             await db.collection("subpages").add(this.data);
+            this.$router.push({ name: "Subpage", params: { subpage: `${this.data.path}` } });
             window.location.reload();
          } catch (e) {
             console.log(e.message);

@@ -81,6 +81,8 @@ export default {
    .column {
       display: flex;
       flex-direction: column;
+      flex: 1;
+      max-width: 300px;
 
       h1 {
          text-align: center;
@@ -95,6 +97,12 @@ export default {
             display: flex;
             margin: 25px 0;
             position: relative;
+            transition: all 0.5s;
+
+            &:hover {
+               border-radius: 15px;
+               border-color: #323232;
+            }
 
             a {
                padding: 15px 25px;

@@ -55,12 +55,13 @@ export default {
 
          try {
             await db.collection("subpages").doc(id).delete();
+            this.$router.push({ name: "EditSubpagePanel" });
+            window.location.reload();
          } catch (error) {
             console.log(error.message);
          }
 
          this.loading = false;
-         this.$router.push({ name: "EditSubpagePanel" });
       },
       setPath(title) {
          // eslint-disable-next-line no-useless-escape
