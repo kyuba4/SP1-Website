@@ -11,6 +11,7 @@ import SubpagesPanel from "../views/SubpagesPanel.vue";
 import AddSubpage from "../views/AddSubpage.vue";
 import EditSubpagePanel from "../views/EditSubpagePanel.vue";
 import EditSubpage from "../views/EditSubpage.vue";
+import Login from "../views/Login.vue";
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,12 @@ const routes = [
     path: "/page/:subpage",
     name: "Subpage",
     component: Subpage,
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
+    meta: { hideFooter: true, title: "Zaloguj się" },
   },
   {
     path: "/panel",

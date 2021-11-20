@@ -7,12 +7,14 @@
             <PanelCard :data="card" v-for="(card, index) in cards" :key="index" />
          </div>
       </div>
+      <div class="logout" @click="logout">Wyloguj się</div>
    </div>
 </template>
 
 <script>
 import GoBackButton from "../components/GoBackButton.vue";
 import PanelCard from "../components/PanelCard.vue";
+import { auth } from "../components/firebaseInit";
 
 export default {
    name: "AddPost",
@@ -40,6 +42,19 @@ export default {
             },
          ],
       };
+   },
+   methods: {
+      async logout() {
+         await auth.signOut();
+         this.$router.push({ name: "Login" });
+      },
+   },
+   created() {
+      if (auth.currentUser) {
+         return;
+      } else {
+         this.$router.push({ name: "Login" });
+      }
    },
 };
 </script>
@@ -180,6 +195,23 @@ export default {
 
    &.visible {
       top: 30px;
+   }
+}
+
+.logout {
+   position: fixed;
+   background: #323232;
+   color: white;
+   bottom: 20px;
+   right: 20px;
+   padding: 10px 20px;
+   border-radius: 999px;
+   cursor: pointer;
+   user-select: none;
+   transition: opacity 300ms;
+
+   &:hover {
+      opacity: 0.8;
    }
 }
 </style>

@@ -59,18 +59,22 @@ export default {
       },
       async savePostData() {
          // Save post in firebase database
-         await db.collection("posts").add(this.post);
+         try {
+            await db.collection("posts").add(this.post);
+
+            this.showBanner = true;
+            setTimeout(() => {
+               this.showBanner = false;
+            }, 5000);
+         } catch (err) {
+            console.log(err.message);
+         }
 
          // Clear post data
          this.post.title = "";
          this.post.desc = "";
          this.post.img = "";
          this.post.imgPath = "";
-
-         this.showBanner = true;
-         setTimeout(() => {
-            this.showBanner = false;
-         }, 5000);
 
          this.loading = false;
       },

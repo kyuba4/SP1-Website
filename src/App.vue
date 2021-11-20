@@ -1,5 +1,8 @@
 <template>
    <div id="app">
+      <div class="panel-link">
+         <router-link :to="{ name: 'Panel' }">{{ user ? "Panel" : "Zaloguj Się" }}</router-link>
+      </div>
       <Header />
       <router-view />
       <Footer v-show="!$route.meta.hideFooter" />
@@ -9,14 +12,22 @@
 <script>
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
+import { auth } from "./components/firebaseInit";
 
 export default {
    data() {
-      return {};
+      return {
+         user: null,
+      };
    },
    components: {
       Header,
       Footer,
+   },
+   created() {
+      auth.onAuthStateChanged((user) => {
+         this.user = user;
+      });
    },
 };
 </script>
@@ -51,6 +62,17 @@ img {
    height: auto;
    display: flex;
    margin: 0 auto;
+}
+
+.panel-link {
+   position: fixed;
+   background: #323232;
+   color: white;
+   padding: 10px 15px;
+   top: 30px;
+   right: 0;
+   z-index: 9999;
+   border-radius: 10px 0 0 10px;
 }
 
 // Quill styles
