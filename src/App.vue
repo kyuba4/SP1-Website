@@ -66,13 +66,16 @@ img {
 
 .panel-link {
    position: fixed;
-   background: #323232;
    color: white;
-   padding: 10px 15px;
    top: 30px;
    right: 0;
    z-index: 9999;
+   padding: 10px 0;
+   background: #323232;
    border-radius: 10px 0 0 10px;
+   a {
+      padding: 10px 15px;
+   }
 }
 
 // Quill styles
