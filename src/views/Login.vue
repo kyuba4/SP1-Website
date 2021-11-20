@@ -1,7 +1,7 @@
 <template>
    <div class="container">
       <Loader v-show="loading" />
-      <div style="padding: 50px 100px; border: 1px solid #ccc">
+      <div class="login-wrap">
          <h1>Zaloguj się</h1>
          <div class="form-container">
             <form @submit.prevent="login">
@@ -66,56 +66,73 @@ export default {
    display: flex;
    justify-content: center;
    align-items: center;
-   margin-top: 100px;
+   margin: 120px 15px 0 15px;
    flex-direction: column;
 
    h1 {
       font-weight: normal;
       font-size: 3rem;
+      text-align: center;
    }
 
-   .form-container {
-      margin-top: 50px;
-      max-width: 300px;
+   .login-wrap {
+      border: 1px solid #ccc;
+      max-width: 400px;
       width: 100%;
+      padding: 30px;
 
-      form {
-         display: flex;
-         flex-direction: column;
+      .form-container {
+         margin-top: 50px;
 
-         input {
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 15px;
-            border-radius: 0px;
-            border: 1px solid #ccc;
-            outline: 0;
-            transition: 300ms;
+         form {
+            display: flex;
+            flex-direction: column;
 
-            &:focus {
-               border: 1px solid #212121;
+            input {
+               padding: 10px 20px;
+               margin: 10px;
+               font-size: 15px;
+               border-radius: 0px;
+               border: 1px solid #ccc;
+               outline: 0;
+               transition: 300ms;
+
+               &:focus {
+                  border: 1px solid #212121;
+               }
+            }
+
+            span {
+               margin-top: 5px;
+               font-size: 0.8rem;
+               cursor: pointer;
+               text-align: center;
+
+               &:hover {
+                  text-decoration: underline;
+               }
+
+               &.error {
+                  color: red;
+                  text-decoration: none;
+                  cursor: text;
+                  border: 1px solid red;
+                  padding: 10px;
+                  margin: 20px 10px 0 10px;
+               }
             }
          }
+      }
+   }
 
-         span {
-            margin-top: 5px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            text-align: center;
+   @media (max-width: 500px) {
+      h1 {
+         font-size: 2rem;
+      }
 
-            &:hover {
-               text-decoration: underline;
-            }
-
-            &.error {
-               color: red;
-               text-decoration: none;
-               cursor: text;
-               border: 1px solid red;
-               padding: 10px;
-               margin: 20px 10px 0 10px;
-            }
-         }
+      .login-wrap {
+         width: fit-content;
+         max-width: 100%;
       }
    }
 }
